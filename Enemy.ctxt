@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=Enemy
+comment1.params=
+comment1.target=Enemy()
+comment2.params=finalDestination
+comment2.target=void\ setFinalDestination(Waypoint)
+comment3.params=
+comment3.target=Waypoint\ getDestination()
+comment4.params=waypoint
+comment4.target=void\ turnTowards(Waypoint)
+comment5.params=
+comment5.target=void\ act()
+comment6.params=waypoint
+comment6.target=boolean\ hasReached(Waypoint)
+comment7.params=x\ y
+comment7.target=boolean\ hasReached(int,\ int)
+numComments=8

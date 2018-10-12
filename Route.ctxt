@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=Route
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ FlightPlan\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=Waypoint\ getStartingWaypoint()
+comment1.text=\r\n\ Returns\ the\ first\ waypoint\ in\ this\ FlightPlan\r\n\ \r\n
+comment2.params=
+comment2.target=Waypoint\ getNextWaypoint()
+comment3.params=
+comment3.target=Waypoint\ getCurrentWaypoint()
+comment4.params=w
+comment4.target=void\ addWaypoint(Waypoint)
+comment5.params=
+comment5.target=boolean\ isOver()
+comment6.params=
+comment6.target=boolean\ hasMoreWaypoints()
+numComments=7

@@ -18,11 +18,11 @@ public class Red extends Actor
     public void act() 
     {
         if (Greenfoot.isKeyDown("right")){
-            Vx = 5;
+            Vx = 2;
         }    
         
         if (Greenfoot.isKeyDown("left")){
-            Vx = -5;
+            Vx = -2;
         }
         
         if (!Greenfoot.isKeyDown("left") && !Greenfoot.isKeyDown("right")){

@@ -44,4 +44,13 @@ public class Route
     public boolean hasMoreWaypoints(){
         return !isOver();
     }
+        
+    public Route getVerticalMirrorRoute(int centerX){
+        Route newRoute = new Route();
+        for(int i = 0; i < waypoints.size(); i++){
+            Waypoint wp = waypoints.get(i);
+            newRoute.addWaypoint(new Waypoint(centerX + centerX - wp.getX(), wp.getY()));
+        }
+        return newRoute;
+    }
 }

@@ -16,7 +16,6 @@ public class Rocket extends Actor
     {
         setLocation(getX(), getY() - 10);
         Rocket rocket = new Rocket();
-        Enemy enemy1 = new Enemy();
         if (isAtEdge()){
             getWorld().removeObject(this);
             return;

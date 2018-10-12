@@ -14,4 +14,6 @@ comment5.params=
 comment5.target=boolean\ isOver()
 comment6.params=
 comment6.target=boolean\ hasMoreWaypoints()
-numComments=7
+comment7.params=centerX
+comment7.target=Route\ getVerticalMirrorRoute(int)
+numComments=8

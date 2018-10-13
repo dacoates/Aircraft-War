@@ -14,7 +14,7 @@ public class Rocket extends Actor
      */
     public void act() 
     {
-        setLocation(getX(), getY() - 10);
+        setLocation(getX(), getY() - 3);
         Rocket rocket = new Rocket();
         if (isAtEdge()){
             getWorld().removeObject(this);

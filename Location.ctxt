@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=Location
+comment0.text=\r\n\ Represents\ a\ single\ X,\ Y\ coordinate\ location.\r\n\ \r\n\ @author\ (Dave\ Coates)\ \r\n\ @version\ (October\ 13,\ 2018)\r\n
+comment1.params=x\ y
+comment1.target=Location(int,\ int)
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Location\r\n
+comment2.params=
+comment2.target=int\ getX()
+comment3.params=
+comment3.target=int\ getY()
+comment4.params=x
+comment4.target=void\ setX(int)
+comment5.params=y
+comment5.target=void\ setY(int)
+comment6.params=
+comment6.target=Location\ clone()
+numComments=7

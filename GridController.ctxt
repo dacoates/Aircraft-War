@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=GridController
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ GridController\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=rows\ cols
+comment1.target=GridController(int,\ int)
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ GridController\r\n\ @params\ rows\ The\ number\ of\ rows\ in\ the\ grid\r\n\ @params\ cols\ The\ number\ of\ cols\ in\ the\ grid\r\n
+comment2.params=
+comment2.target=void\ act()
+comment3.params=row\ col
+comment3.target=Location\ getAssignmentLocation(int,\ int)
+comment4.params=row\ col
+comment4.target=Location\ calculateLocation(int,\ int)
+numComments=5

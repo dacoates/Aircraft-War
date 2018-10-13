@@ -18,12 +18,18 @@ public class EnemyController extends Actor
     private int finalY1 = 25;
     private int finalX2 = 150;
     private int finalY2 = 25;
+    private int gridRow1 = 1;
+    private int gridCol1 = 1;
+    private int gridRow2 = 1;
+    private int gridCol2 = 6;
     int totalEnemyToSpawn = 50;
     Route routeA1, routeA2;
+    GridController gridController;
     
     public EnemyController(){
-        routeA1 = getRouteA1();
+        routeA1 = new RouteA();
         routeA2 = routeA1.getVerticalMirrorRoute(150);
+        gridController = new GridController(5, 10);
     }
     
     
@@ -32,20 +38,21 @@ public class EnemyController extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act(){
+        gridController.act();
         thisFrameTime = new java.util.Date().getTime();
         if(thisFrameTime >= nextSpawnTime && enemyCount < totalEnemyToSpawn){
             enemyCount++;
             Enemy enemy;
             Route routeA1;
             if(enemyCount % 2 == 0){
-                routeA1 = getRouteA1();
+                routeA1 = new RouteA();
                 enemy = new Enemy(routeA1);
-                enemy.setFinalDestination(new Waypoint(finalX2, finalY2));
-                incrementFinalX2AndY2();
+                enemy.setGridController(gridController, gridRow1, gridCol1);
+                incrementGridAssignment1();
             } else {
-                enemy = new Enemy(getRouteA1().getVerticalMirrorRoute(150));
-                enemy.setFinalDestination(new Waypoint(finalX1, finalY1));
-                incrementFinalX1AndY1();
+                enemy = new Enemy(new RouteA().getVerticalMirrorRoute(150));
+                enemy.setGridController(gridController, gridRow2, gridCol2);
+                incrementGridAssignment2();
             }
             spawn(enemy);
             nextSpawnTime = thisFrameTime + spawnInterval;
@@ -55,6 +62,24 @@ public class EnemyController extends Actor
     
     private void spawn(Enemy enemy){
         getWorld().addObject(enemy, enemy.getDestination().getX(), enemy.getDestination().getY());
+    }
+    
+    private void incrementGridAssignment1(){
+        if(gridCol1 >= 5){
+            gridCol1 = 1;
+            gridRow1++;
+        } else {
+            gridCol1++;
+        }
+    }
+    
+    private void incrementGridAssignment2(){
+        if(gridCol2 >= 10){
+            gridCol2 = 6;
+            gridRow2++;
+        } else {
+            gridCol2++;
+        }
     }
     
     private void incrementFinalX1AndY1(){
@@ -73,42 +98,5 @@ public class EnemyController extends Actor
         } else {
             finalX2 += 25;
         }
-    }
-    
-    public static Route getRouteA1(){
-        Route route = new Route();
-        int centerX = 150;
-        route.addWaypoint(new Waypoint(centerX-50, 1));
-        route.addWaypoint(new Waypoint(centerX-50, 30));
-        route.addWaypoint(new Waypoint(centerX-48, 50));
-        route.addWaypoint(new Waypoint(centerX-45, 60));
-        route.addWaypoint(new Waypoint(centerX-39, 70));
-        route.addWaypoint(new Waypoint(centerX-30, 80));
-        route.addWaypoint(new Waypoint(centerX, 110));
-        route.addWaypoint(new Waypoint(centerX+50, 150));
-        route.addWaypoint(new Waypoint(centerX+62, 160));
-        route.addWaypoint(new Waypoint(centerX+78, 170));
-        route.addWaypoint(new Waypoint(centerX+88, 179));
-        route.addWaypoint(new Waypoint(centerX+97, 183));
-        route.addWaypoint(new Waypoint(centerX+105, 190));
-        route.addWaypoint(new Waypoint(centerX+105, 190));
-        route.addWaypoint(new Waypoint(centerX+115, 200));
-        route.addWaypoint(new Waypoint(centerX+125, 215));
-        route.addWaypoint(new Waypoint(centerX+134, 230));
-        route.addWaypoint(new Waypoint(centerX+138, 240));
-        route.addWaypoint(new Waypoint(centerX+140, 250));
-        route.addWaypoint(new Waypoint(centerX+138, 260));
-        route.addWaypoint(new Waypoint(centerX+136, 270));
-        route.addWaypoint(new Waypoint(centerX+132, 280));
-        route.addWaypoint(new Waypoint(centerX+120, 290));
-        route.addWaypoint(new Waypoint(centerX+110, 296));
-        route.addWaypoint(new Waypoint(centerX+95, 303));
-        route.addWaypoint(new Waypoint(centerX+80, 304));
-        route.addWaypoint(new Waypoint(centerX+55, 300));
-        route.addWaypoint(new Waypoint(centerX+40, 290));
-        route.addWaypoint(new Waypoint(centerX+29, 280));
-        route.addWaypoint(new Waypoint(centerX+24, 270));
-        route.addWaypoint(new Waypoint(centerX+23, 250));
-        return route;
     }
 }

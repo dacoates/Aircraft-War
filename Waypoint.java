@@ -1,36 +1,13 @@
 /**
- * Write a description of class Waypoint here.
+ * Represents a destination Location in an X, Y cordinate grid.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Dave Coates) 
+ * @version (October 13, 2018)
  */
-public class Waypoint implements Cloneable{
-    // instance variables - replace the example below with your own
-    private int x;
-    private int y;
+public class Waypoint extends Location implements Cloneable{
 
-    /**
-     * Constructor for objects of class Waypoint
-     */
     public Waypoint(int x, int y){
-        this.x = x;
-        this.y = y;
-    }
-    
-    public int getX(){
-        return x;
-    }
-    
-    public int getY(){
-        return y;
-    }
-    
-    public void setX(int x){
-        this.x = x;
-    }
-    
-    public void setY(int y){
-        this.y = y;
+        super(x, y);
     }
     
     public Waypoint clone(){

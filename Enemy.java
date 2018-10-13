@@ -5,28 +5,35 @@ public class Enemy extends Actor{
     
     private int velocity = 2;
     private int centerX = 150;
-    public enum Mode{FOLLOW_ROUTE, GOING_TO_FINAL_DESTINATION, STAY_IN_GRID, ATTACK}
+    public enum Mode{FOLLOW_ROUTE, GOING_TO_GRID_ASSIGNMENT, STAY_IN_GRID, ATTACK, LEFT_TURN, RIGHT_TURN}
     private Mode mode = Mode.FOLLOW_ROUTE;
+    private Mode nextMode;
     private Route route;
-    private Waypoint destination;
-    private Waypoint finalDestination;
+    private Location destination;
+    private boolean fire = true;
+    private int chance = 1;
+    private GridController gridController;
+    private int gridRow;
+    private int gridCol;
     
     public Enemy(Route route){
         this.route = route;
         destination = route.getNextWaypoint();
-        finalDestination = new Waypoint(250, 1);
+//        finalDestination = new Waypoint(250, 1);
         mode = Mode.FOLLOW_ROUTE;
     }
     
-    public void setFinalDestination(Waypoint finalDestination){
-        this.finalDestination = finalDestination;
+    public void setGridController(GridController gridController, int row, int col){
+        this.gridController = gridController;
+        this.gridRow = row;
+        this.gridCol = col;
     }
     
-    public Waypoint getDestination(){
+    public Location getDestination(){
         return destination.clone();
     }
     
-    public void turnTowards(Waypoint waypoint){
+    public void turnTowards(Location waypoint){
         turnTowards(waypoint.getX(), waypoint.getY());
     }
     
@@ -34,39 +41,56 @@ public class Enemy extends Actor{
         if(isAtEdge()){
             getWorld().removeObject(this);
         }
+        if(mode == Mode.RIGHT_TURN){
+            setRotation(getRotation() + 12);
+            move(velocity);
+            if(getRotation() >= 258 && getRotation() <= 282){
+                mode = Mode.FOLLOW_ROUTE;
+            }
+        }
         if(mode == Mode.FOLLOW_ROUTE){
             if(hasReached(destination) && !route.isOver()){
                 destination = route.getNextWaypoint();
             }
             if(hasReached(destination) && route.isOver()){
-                destination = finalDestination;
-                mode = Mode.GOING_TO_FINAL_DESTINATION;
+                destination = gridController.getAssignmentLocation(gridRow, gridCol);
+                mode = Mode.GOING_TO_GRID_ASSIGNMENT;
             }
             turnTowards(destination);
             move(velocity);
         }
-        if(mode == Mode.GOING_TO_FINAL_DESTINATION){
-            if(!hasReached(finalDestination)){
-                turnTowards(finalDestination);
+        if(mode == Mode.GOING_TO_GRID_ASSIGNMENT){
+            if(!hasReached(gridController.getAssignmentLocation(gridRow, gridCol))){
+                turnTowards(gridController.getAssignmentLocation(gridRow, gridCol));
                 move(velocity);
             }
-            if(hasReached(finalDestination)){
+            if(hasReached(gridController.getAssignmentLocation(gridRow, gridCol))){
                 velocity = 0;
                 setRotation(90); // face down toward player
                 mode = Mode.STAY_IN_GRID;
             }
         }
         if(mode == Mode.STAY_IN_GRID){
-            setLocation(finalDestination);
+            //setLocation(finalDestination);
+            setLocation(gridController.getAssignmentLocation(gridRow, gridCol));
             setRotation(90);
         }
+        if (Greenfoot.getRandomNumber(100) < chance && fire){
+            
+            getWorld().addObject(new Enemy_Rocket(), getX(), getY());
+            fire = false;
+        }  
     }
     
-    private void setLocation(Waypoint waypoint){
+    private void setLocation(Location waypoint){
         setLocation(waypoint.getX(), waypoint.getY());
     }
     
-    private boolean hasReached(Waypoint waypoint){
+    private boolean hasReached(Location waypoint){
+        if(mode == Mode.FOLLOW_ROUTE && hasReached(140, 250)){
+            mode = Mode.RIGHT_TURN;
+            nextMode = Mode.FOLLOW_ROUTE;
+        }
         return hasReached(waypoint.getX(), waypoint.getY());
     }
     

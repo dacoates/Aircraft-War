@@ -20,10 +20,10 @@
     private int maxSwell = 3;
     private int xOffset = 0;
     private int yOffset = 0;
-    private int maxXOffset = 25;
+    private int maxXOffset = 50;
     private int minXOffset = 0;
-    private int gridXSpacing = 20;
-    private int gridYSpacing = 20;
+    private int gridXSpacing = 40;
+    private int gridYSpacing = 40;
     long thisFrameTime = 0;
     long lastMoveTime = 0;
     long lastSwellTime = 0;

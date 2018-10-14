@@ -7,8 +7,8 @@ import java.util.List;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class EnemyController extends Actor
-{
+public class EnemyController extends Actor{
+    
     long thisFrameTime;
     long lastFrameTime = new java.util.Date().getTime();
     long spawnInterval = 50; // .1 seconds

@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Red extends Actor
+public class Player extends Actor
 {
     private int Vx = 0;
     private int Vy = 0;

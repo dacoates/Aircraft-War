@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=EnemyRocket
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Enemy_Rocket\ here.\r\n\ \r\n\ @author\ (Devon\ Coates)\ \r\n\ @version\ (October,\ 13,\ 2018)\r\n
+comment1.params=
+comment1.target=EnemyRocket()
+comment2.params=enabled
+comment2.target=void\ enableTargetAquisition(boolean)
+comment3.params=
+comment3.target=void\ act()
+comment3.text=\r\n\ Act\ -\ do\ whatever\ the\ Enemy_Rocket\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
+numComments=4

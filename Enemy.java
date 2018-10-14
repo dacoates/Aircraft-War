@@ -10,8 +10,8 @@ public class Enemy extends Actor{
     private Mode nextMode;
     private Route route;
     private Location destination;
-    private boolean fire = true;
-    private int chance = 1;
+    private boolean canFire = true;
+    private int fireProbability = 3;
     private GridController gridController;
     private int gridRow;
     private int gridCol;
@@ -75,10 +75,9 @@ public class Enemy extends Actor{
             setLocation(gridController.getAssignmentLocation(gridRow, gridCol));
             setRotation(90);
         }
-        if (Greenfoot.getRandomNumber(100) < chance && fire){
-            
-            getWorld().addObject(new Enemy_Rocket(), getX(), getY());
-            fire = false;
+        if(Greenfoot.getRandomNumber(10000) < fireProbability && canFire){
+            getWorld().addObject(new EnemyRocket(), getX(), getY());
+            canFire = false;
         }  
     }
     

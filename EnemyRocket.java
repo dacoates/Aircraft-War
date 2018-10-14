@@ -3,12 +3,24 @@ import java.util.*;
 /**
  * Write a description of class Enemy_Rocket here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Devon Coates) 
+ * @version (October, 13, 2018)
  */
-public class Enemy_Rocket extends Actor
-{
-    boolean aim = true;
+public class EnemyRocket extends Actor{
+    
+    boolean canAim = false;
+    
+
+    
+    public EnemyRocket(){
+        super();
+        setRotation(90);
+    }
+    
+    public void enableTargetAquisition(boolean enabled){
+        this.canAim = enabled;
+    }
+    
     /**
      * Act - do whatever the Enemy_Rocket wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -16,12 +28,12 @@ public class Enemy_Rocket extends Actor
     public void act() 
     {
         Explosion explosion = new Explosion();
-        if (aim == true){
-            List reds = getWorld().getObjects(Red.class);
+        if (canAim == true){
+            List reds = getWorld().getObjects(Player.class);
             if(reds.size() >= 1){
-                Red red = (Red)reds.get(0);
+                Player red = (Player)reds.get(0);
                 turnTowards(red.getX(), red.getY());
-                aim = false;
+                canAim = false;
             } else {
                 setRotation(90);
             }
@@ -31,8 +43,8 @@ public class Enemy_Rocket extends Actor
             return;
         }
         move(2);
-        if (isTouching(Red.class)){
-            removeTouching(Red.class);
+        if (isTouching(Player.class)){
+            removeTouching(Player.class);
             getWorld().addObject(explosion, getX(), getY());
             getWorld().removeObject(this);
         }

@@ -1,4 +1,3 @@
-import greenfoot.*;
 import java.util.*;
 
 /**
@@ -7,29 +6,30 @@ import java.util.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class GridController extends Actor{
+public class GridController{
     
     private int rows;
     private int cols;
-    private enum Mode {SWELL, SHRINK, STATIC}
-    private Mode mode = Mode.STATIC;
-    private enum Movement {LEFT, RIGHT, NONE}
-    private Movement movement = Movement.NONE;
+    private enum SwellMode {SWELL, SHRINK, STATIC}
+    private SwellMode swellMode = SwellMode.STATIC;
+    private enum MoveMode {LEFT, RIGHT, NONE}
+    private MoveMode moveMode = MoveMode.NONE;
+    private int worldWidth = GameConstants.WORLD_WIDTH;
+    private int worldHeight = GameConstants.WORLD_HEIGHT;
     private int moveRate = 1;
     private int swellRate = 1;
-    private int swellFactor = 0;
-    private int maxSwell = 3;
+    private int swell = 0;
+    private int maxSwell = 4;
     private int xOffset = 0;
     private int yOffset = 0;
-    private int maxXOffset = 50;
     private int minXOffset = 0;
     private int gridXSpacing = 40;
     private int gridYSpacing = 40;
     private long thisFrameTime = 0;
-    private long lastMoveTime = 0;
-    private long lastSwellTime = 0;
     private long moveInterval = 300;
     private long swellInterval = 350;
+    private long nextMoveTime = 0;
+    private long nextSwellTime = 0;
     
     /**
      * Constructor for objects of class GridController
@@ -39,35 +39,35 @@ public class GridController extends Actor{
     public GridController(int rows, int cols){
         this.rows = rows;
         this.cols = cols;
-        movement = Movement.RIGHT;
-        mode = Mode.SWELL;
+        moveMode = MoveMode.RIGHT;
+        swellMode = SwellMode.SWELL;
     }
     
     public void act(){
         thisFrameTime = new Date().getTime();
-        if(movement != Movement.NONE && thisFrameTime - lastMoveTime > moveInterval){
-            lastMoveTime = thisFrameTime;
-            if(movement == Movement.RIGHT){
-                if(xOffset++ > maxXOffset){
-                    movement = Movement.LEFT;
+        if(moveMode != MoveMode.NONE && thisFrameTime >= nextMoveTime){
+            nextMoveTime = thisFrameTime + moveInterval;
+            if(moveMode == MoveMode.RIGHT){
+                if(xOffset++ > maxXOffset()){
+                    moveMode = MoveMode.LEFT;
                 }
             }
-            if(movement == Movement.LEFT){
+            if(moveMode == MoveMode.LEFT){
                 if(xOffset-- < minXOffset){
-                    movement = Movement.RIGHT;
+                    moveMode = MoveMode.RIGHT;
                 }
             }
         }
-        if(mode != Mode.STATIC && thisFrameTime - lastSwellTime > swellInterval){
-            lastSwellTime = thisFrameTime;
-            if(mode == Mode.SWELL){
-                if(swellFactor++ > maxSwell){
-                    mode = Mode.SHRINK;
+        if(swellMode != SwellMode.STATIC && thisFrameTime >= nextSwellTime){
+            nextSwellTime = thisFrameTime + swellInterval;
+            if(swellMode == SwellMode.SWELL){
+                if(swell++ > maxSwell){
+                    swellMode = SwellMode.SHRINK;
                 }
             }
-            if(mode == Mode.SHRINK){
-                if(swellFactor-- <= 0){
-                    mode = Mode.SWELL;
+            if(swellMode == SwellMode.SHRINK){
+                if(swell-- <= 0){
+                    swellMode = SwellMode.SWELL;
                 }
             }
         }
@@ -78,6 +78,10 @@ public class GridController extends Actor{
     }
     
     private Location calculateLocation(int row, int col){
-        return new Location(col * gridXSpacing + xOffset + swellFactor * col, row * gridYSpacing + swellFactor * row * 2);
+        return new Location(col * gridXSpacing + xOffset + swell * col, row * gridYSpacing + swell * row * 2);
+    }
+    
+    private int maxXOffset(){
+        return worldWidth - (cols * gridXSpacing + cols * swell) - gridXSpacing;
     }
 }

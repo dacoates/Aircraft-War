@@ -1,0 +1,4 @@
+#BlueJ class context
+comment0.target=GameConstants
+comment0.text=\r\n\ A\ collection\ of\ game\ constants\ that\ are\ needed\ by\ differnt\ classes\ that\ have\ no\ reference\ to\ each\ other.\r\n\ \r\n\ @author\ (Dave\ Coates)\ \r\n\ @version\ (October\ 13,\ 2018)\r\n
+numComments=1

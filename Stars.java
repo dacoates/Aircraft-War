@@ -1,25 +1,18 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Stars here.
+ * Concrete World subclass.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Devon Coates and Dave Coates) 
+ * @version (Fall 2018)
  */
 public class Stars extends World{
 
-    private long startTime = new java.util.Date().getTime(); 
-    private long spawnInterval = 500; // .5 seconds
-    private long nextSpawnTime = startTime + spawnInterval;
-    private float playerSpawnPercentX = .5f;
-    private float playerSpawnPercentY = .95f;
-    
+    private float playerSpawnPercentX = .5f;  // Player spawn X as a percentage of World width.
+    private float playerSpawnPercentY = .95f; // Player spawn Y as a percentage of World height.
 
-    /**
-     * Constructor for objects of class Stars.
-     */
-    public Stars() {    
-        super(600, 800, 1); 
+    public Stars(){    
+        super(GameConstants.WORLD_WIDTH, GameConstants.WORLD_HEIGHT, 1); 
         addObject(new Player(), getSpawnX(), getSpawnY());
         addObject(new EnemyController(), 1, 1);
     }

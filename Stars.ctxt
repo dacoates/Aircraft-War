@@ -1,9 +1,8 @@
 #BlueJ class context
 comment0.target=Stars
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Stars\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Concrete\ World\ subclass.\r\n\ \r\n\ @author\ (Devon\ Coates\ and\ Dave\ Coates)\ \r\n\ @version\ (Fall\ 2018)\r\n
 comment1.params=
 comment1.target=Stars()
-comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Stars.\r\n
 comment2.params=
 comment2.target=int\ getSpawnX()
 comment3.params=

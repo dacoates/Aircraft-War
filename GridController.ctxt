@@ -10,4 +10,6 @@ comment3.params=row\ col
 comment3.target=Location\ getAssignmentLocation(int,\ int)
 comment4.params=row\ col
 comment4.target=Location\ calculateLocation(int,\ int)
-numComments=5
+comment5.params=
+comment5.target=int\ maxXOffset()
+numComments=6

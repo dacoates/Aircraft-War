@@ -10,7 +10,6 @@ import java.util.List;
 public class EnemyController extends Actor{
     
     long thisFrameTime;
-    long lastFrameTime = new java.util.Date().getTime();
     long spawnInterval = 80; // .08 seconds
     long nextSpawnTime;
     int enemyCount = 0;
@@ -57,7 +56,6 @@ public class EnemyController extends Actor{
             spawn(enemy);
             nextSpawnTime = thisFrameTime + spawnInterval;
         }
-        lastFrameTime = thisFrameTime;
     }
     
     private void spawn(Enemy enemy){

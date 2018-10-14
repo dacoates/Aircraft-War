@@ -13,7 +13,7 @@ public class RouteA extends Route
      * Constructor for objects of class RouteA
      */
     public RouteA(){
-        int centerX = 300;
+        int centerX = GameConstants.WORLD_WIDTH / 2;
         addWaypoint(new Waypoint(centerX-50*2, 1*2));
         addWaypoint(new Waypoint(centerX-50*2, 30*2));
         addWaypoint(new Waypoint(centerX-48*2, 50*2));

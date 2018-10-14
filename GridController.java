@@ -16,7 +16,7 @@ public class GridController{
     private MoveMode moveMode = MoveMode.NONE;
     private float worldWidth = (float) GameConstants.WORLD_WIDTH;
     private float worldHeight = (float) GameConstants.WORLD_HEIGHT;
-    private float moveRate = .005f;
+    private float moveRate = .4f;
     private float swellRate = .02f;
     private float swell = 0f;
     private float maxSwell = 10f;
@@ -48,12 +48,12 @@ public class GridController{
         if(moveMode != MoveMode.NONE && thisFrameTime >= nextMoveTime){
             nextMoveTime = thisFrameTime + moveInterval;
             if(moveMode == MoveMode.RIGHT){
-                if(xOffset++ > maxXOffset()){
+                if((xOffset += moveRate) > maxXOffset()){
                     moveMode = MoveMode.LEFT;
                 }
             }
             if(moveMode == MoveMode.LEFT){
-                if(xOffset-- < minXOffset){
+                if((xOffset -= moveRate) < minXOffset){
                     moveMode = MoveMode.RIGHT;
                 }
             }
@@ -61,15 +61,13 @@ public class GridController{
         if(swellMode != SwellMode.STATIC && thisFrameTime >= nextSwellTime){
             nextSwellTime = thisFrameTime + swellInterval;
             if(swellMode == SwellMode.SWELL){
-                swell += swellRate;
-                if(swell >= maxSwell){
+                if((swell += swellRate) >= maxSwell){
                     swell = maxSwell;
                     swellMode = SwellMode.SHRINK;
                 }
             }
             if(swellMode == SwellMode.SHRINK){
-                swell -= swellRate;
-                if(swell <= 0){
+                if((swell -= swellRate) <= 0){
                     swell = 0;
                     swellMode = SwellMode.SWELL;
                 }

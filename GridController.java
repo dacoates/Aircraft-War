@@ -8,26 +8,26 @@ import java.util.*;
  */
 public class GridController{
     
-    private int rows;
-    private int cols;
+    private float rows;
+    private float cols;
     private enum SwellMode {SWELL, SHRINK, STATIC}
     private SwellMode swellMode = SwellMode.STATIC;
     private enum MoveMode {LEFT, RIGHT, NONE}
     private MoveMode moveMode = MoveMode.NONE;
-    private int worldWidth = GameConstants.WORLD_WIDTH;
-    private int worldHeight = GameConstants.WORLD_HEIGHT;
-    private int moveRate = 1;
-    private int swellRate = 1;
-    private int swell = 0;
-    private int maxSwell = 4;
-    private int xOffset = 0;
-    private int yOffset = 0;
-    private int minXOffset = 0;
-    private int gridXSpacing = 40;
-    private int gridYSpacing = 40;
+    private float worldWidth = (float) GameConstants.WORLD_WIDTH;
+    private float worldHeight = (float) GameConstants.WORLD_HEIGHT;
+    private float moveRate = .005f;
+    private float swellRate = .02f;
+    private float swell = 0f;
+    private float maxSwell = 10f;
+    private float xOffset = 0f;
+    private float yOffset = 0f;
+    private float minXOffset = 0f;
+    private float gridXSpacing = 35f;
+    private float gridYSpacing = 30f;
     private long thisFrameTime = 0;
-    private long moveInterval = 300;
-    private long swellInterval = 350;
+    private long moveInterval = 10;
+    private long swellInterval = 10;
     private long nextMoveTime = 0;
     private long nextSwellTime = 0;
     
@@ -61,12 +61,16 @@ public class GridController{
         if(swellMode != SwellMode.STATIC && thisFrameTime >= nextSwellTime){
             nextSwellTime = thisFrameTime + swellInterval;
             if(swellMode == SwellMode.SWELL){
-                if(swell++ > maxSwell){
+                swell += swellRate;
+                if(swell >= maxSwell){
+                    swell = maxSwell;
                     swellMode = SwellMode.SHRINK;
                 }
             }
             if(swellMode == SwellMode.SHRINK){
-                if(swell-- <= 0){
+                swell -= swellRate;
+                if(swell <= 0){
+                    swell = 0;
                     swellMode = SwellMode.SWELL;
                 }
             }
@@ -74,14 +78,16 @@ public class GridController{
     }
     
     public Location getAssignmentLocation(int row, int col){
-        return calculateLocation(row, col); // To-do: This is not the correct implementation
+        return calculateLocation((float) row, (float)col); // To-do: This is not the correct implementation
     }
     
-    private Location calculateLocation(int row, int col){
-        return new Location(col * gridXSpacing + xOffset + swell * col, row * gridYSpacing + swell * row * 2);
+    private Location calculateLocation(float row, float col){
+        int x = (int) (col * gridXSpacing + xOffset + swell * col);
+        int y = (int) (row * gridYSpacing + swell * row * 2);
+        return new Location(x, y);
     }
     
-    private int maxXOffset(){
+    private float maxXOffset(){
         return worldWidth - (cols * gridXSpacing + cols * swell) - gridXSpacing;
     }
 }

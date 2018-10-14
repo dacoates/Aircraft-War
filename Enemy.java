@@ -3,7 +3,7 @@
     
 public class Enemy extends Actor{
     
-    private int velocity = 2;
+    private int velocity = GameConstants.DEFAULT_ENEMY_VELOCITY;
     private int centerX = 150;
     public enum Mode{FOLLOW_ROUTE, GOING_TO_GRID_ASSIGNMENT, STAY_IN_GRID, ATTACK, LEFT_TURN, RIGHT_TURN}
     private Mode mode = Mode.FOLLOW_ROUTE;

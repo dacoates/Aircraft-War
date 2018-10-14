@@ -8,4 +8,5 @@ public class GameConstants{
     
     public static final int WORLD_WIDTH = 600;
     public static final int WORLD_HEIGHT = 800;
+    public static final int DEFAULT_ENEMY_VELOCITY = 2;
 }

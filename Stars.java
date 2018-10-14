@@ -12,7 +12,7 @@ public class Stars extends World{
     private float playerSpawnPercentY = .95f; // Player spawn Y as a percentage of World height.
 
     public Stars(){    
-        super(GameConstants.WORLD_WIDTH, GameConstants.WORLD_HEIGHT, 1); 
+        super(GameConstants.WORLD_WIDTH, GameConstants.WORLD_HEIGHT, GameConstants.WORLD_CELL_SIZE); 
         addObject(new Player(), getSpawnX(), getSpawnY());
         addObject(new EnemyController(), 1, 1);
     }

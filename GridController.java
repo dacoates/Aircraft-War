@@ -23,11 +23,11 @@ public class GridController{
     private float xOffset = 0f;
     private float yOffset = 0f;
     private float minXOffset = 0f;
-    private float gridXSpacing = 35f;
-    private float gridYSpacing = 30f;
+    private float gridXSpacing = 35 / GameConstants.WORLD_CELL_SIZE;
+    private float gridYSpacing = 30 / GameConstants.WORLD_CELL_SIZE;
     private long thisFrameTime = 0;
-    private long moveInterval = 10;
-    private long swellInterval = 10;
+    private long moveInterval = 5;
+    private long swellInterval = 5;
     private long nextMoveTime = 0;
     private long nextSwellTime = 0;
     

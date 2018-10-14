@@ -19,14 +19,9 @@ public class Stars extends World{
      * Constructor for objects of class Stars.
      */
     public Stars() {    
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(1200, 850, 1); 
-        
-        Player player = new Player();
-        addObject(player, getSpawnX(), getSpawnY());
-
-        EnemyController enemyController = new EnemyController();
-        addObject(enemyController, 1, 1);
+        super(600, 800, 1); 
+        addObject(new Player(), getSpawnX(), getSpawnY());
+        addObject(new EnemyController(), 1, 1);
     }
     
     private int getSpawnX(){

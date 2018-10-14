@@ -1,4 +1,4 @@
- import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.List;
 
 /**
@@ -50,7 +50,7 @@ public class EnemyController extends Actor{
                 enemy.setGridController(gridController, gridRow1, gridCol1);
                 incrementGridAssignment1();
             } else {
-                enemy = new Enemy(new RouteA().getVerticalMirrorRoute(150));
+                enemy = new Enemy(new RouteA().getVerticalMirrorRoute(getWorld().getWidth()/2));
                 enemy.setGridController(gridController, gridRow2, gridCol2);
                 incrementGridAssignment2();
             }
@@ -61,7 +61,9 @@ public class EnemyController extends Actor{
     }
     
     private void spawn(Enemy enemy){
-        getWorld().addObject(enemy, enemy.getDestination().getX(), enemy.getDestination().getY());
+        int spawnX = enemy.getDestination().getX();
+        int spawnY = enemy.getDestination().getY();
+        getWorld().addObject(enemy, spawnX, spawnY);
     }
     
     private void incrementGridAssignment1(){

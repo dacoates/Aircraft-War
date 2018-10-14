@@ -19,7 +19,6 @@ public class Enemy extends Actor{
     public Enemy(Route route){
         this.route = route;
         destination = route.getNextWaypoint();
-//        finalDestination = new Waypoint(250, 1);
         mode = Mode.FOLLOW_ROUTE;
     }
     
@@ -38,9 +37,6 @@ public class Enemy extends Actor{
     }
     
     public void act(){
-        if(isAtEdge()){
-            getWorld().removeObject(this);
-        }
         if(mode == Mode.RIGHT_TURN){
             setRotation(getRotation() + 12);
             move(velocity);
@@ -79,6 +75,9 @@ public class Enemy extends Actor{
             getWorld().addObject(new EnemyRocket(), getX(), getY());
             canFire = false;
         }  
+        if(isAtEdge()){
+            getWorld().removeObject(this);
+        }
     }
     
     private void setLocation(Location waypoint){
@@ -94,14 +93,11 @@ public class Enemy extends Actor{
     }
     
     private boolean hasReached(int x, int y){
-        //return x == getX() && y == getY();
-        
         double x1 = (double)x;
         double y1 = (double)y;
         double x2 = (double)getX();
         double y2 = (double)getY();
         double distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
         return distance < Math.ceil(velocity * .9); // If within 90% of your velocity to target, then consider target reached.
-        
     }
 }

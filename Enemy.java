@@ -11,8 +11,8 @@ public class Enemy extends Actor{
     private Mode nextMode;
     private Route route;
     private Location destination;
-    private boolean canFire = true;
-    private int fireProbability = 3;
+    private boolean canFire = false;
+    private int fireProbability = 35;
     private GridController gridController;
     private int gridRow;
     private int gridCol;
@@ -28,6 +28,10 @@ public class Enemy extends Actor{
         this.gridController = gridController;
         this.gridRow = row;
         this.gridCol = col;
+    }
+    
+    public void setFireMode(boolean enable){
+        this.canFire = enable;
     }
     
     public Location getDestination(){
@@ -72,6 +76,7 @@ public class Enemy extends Actor{
             if(hasReached(gridController.getAssignmentLocation(gridRow, gridCol))){
                 velocity = 0;
                 setRotation(90); // face down toward player
+                canFire = true;
                 mode = Mode.STAY_IN_GRID;
             }
         }

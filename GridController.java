@@ -1,12 +1,13 @@
-    import java.util.*;
-    
-    /**
-     * Write a description of class GridController here.
-     * 
-     * @author (your name) 
-     * @version (a version number or a date)
-     */
-    public class GridController{
+import greenfoot.*;
+import java.util.*;
+
+/**
+ * Write a description of class GridController here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class GridController extends Actor{
     
     private int rows;
     private int cols;
@@ -24,11 +25,11 @@
     private int minXOffset = 0;
     private int gridXSpacing = 40;
     private int gridYSpacing = 40;
-    long thisFrameTime = 0;
-    long lastMoveTime = 0;
-    long lastSwellTime = 0;
-    long moveInterval = 300;
-    long swellInterval = 350;
+    private long thisFrameTime = 0;
+    private long lastMoveTime = 0;
+    private long lastSwellTime = 0;
+    private long moveInterval = 300;
+    private long swellInterval = 350;
     
     /**
      * Constructor for objects of class GridController

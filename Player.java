@@ -11,12 +11,16 @@ public class Player extends Actor
     private int Vx = 0;
     private int Vy = 0;
     private boolean canFire;
+    
+    public Player(){
+        getImage().scale(50, 50);
+    }
+    
     /**
      * Act - do whatever the Red wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    public void act() 
-    {
+    public void act(){
         if (Greenfoot.isKeyDown("right")){
             Vx = 2;
         }    

@@ -20,6 +20,7 @@ public class Enemy extends Actor{
         this.route = route;
         destination = route.getNextWaypoint();
         mode = Mode.FOLLOW_ROUTE;
+        getImage().scale(50, 50);
     }
     
     public void setGridController(GridController gridController, int row, int col){

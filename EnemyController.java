@@ -11,7 +11,7 @@ public class EnemyController extends Actor{
     
     long thisFrameTime;
     long lastFrameTime = new java.util.Date().getTime();
-    long spawnInterval = 50; // .1 seconds
+    long spawnInterval = 80; // .08 seconds
     long nextSpawnTime;
     int enemyCount = 0;
     private int finalX1 = 25;

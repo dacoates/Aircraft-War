@@ -12,12 +12,16 @@ public class GridController{
     private float cols;
     private enum SwellMode {SWELL, SHRINK, STATIC}
     private SwellMode swellMode = SwellMode.STATIC;
-    private enum MoveMode {LEFT, RIGHT, NONE}
-    private MoveMode moveMode = MoveMode.NONE;
+    private enum LeftRightMode {LEFT, RIGHT, NONE}
+    private LeftRightMode leftRightMode = LeftRightMode.NONE;
+    private enum UpDownMode {UP, DOWN, NONE}
+    private UpDownMode upDownMode = UpDownMode.DOWN;
     private float worldWidth = (float) GameConstants.WORLD_WIDTH;
     private float worldHeight = (float) GameConstants.WORLD_HEIGHT;
-    private float moveRate = .4f;
+    private float leftRightRate = .4f;
+    private float maxYOffset = 20f;
     private float swellRate = .02f;
+    private float upDownRate = .2f;
     private float swell = 0f;
     private float maxSwell = 10f;
     private float xOffset = 0f;
@@ -26,10 +30,12 @@ public class GridController{
     private float gridXSpacing = 35 / GameConstants.WORLD_CELL_SIZE;
     private float gridYSpacing = 30 / GameConstants.WORLD_CELL_SIZE;
     private long thisFrameTime = 0;
-    private long moveInterval = 5;
+    private long leftRightInterval = 5;
+    private long nextLeftRightTime = 0;
     private long swellInterval = 5;
-    private long nextMoveTime = 0;
     private long nextSwellTime = 0;
+    private long nextUpDownTime = 0;
+    private long upDownInterval = 5;
     
     /**
      * Constructor for objects of class GridController
@@ -39,22 +45,23 @@ public class GridController{
     public GridController(int rows, int cols){
         this.rows = rows;
         this.cols = cols;
-        moveMode = MoveMode.RIGHT;
+        leftRightMode = LeftRightMode.RIGHT;
         swellMode = SwellMode.SWELL;
+        upDownMode =UpDownMode.DOWN;
     }
     
     public void act(){
         thisFrameTime = new Date().getTime();
-        if(moveMode != MoveMode.NONE && thisFrameTime >= nextMoveTime){
-            nextMoveTime = thisFrameTime + moveInterval;
-            if(moveMode == MoveMode.RIGHT){
-                if((xOffset += moveRate) > maxXOffset()){
-                    moveMode = MoveMode.LEFT;
+        if(leftRightMode != LeftRightMode.NONE && thisFrameTime >= nextLeftRightTime){
+            nextLeftRightTime = thisFrameTime + leftRightInterval;
+            if(leftRightMode == LeftRightMode.RIGHT){
+                if((xOffset += leftRightRate) > maxXOffset()){
+                    leftRightMode = LeftRightMode.LEFT;
                 }
             }
-            if(moveMode == MoveMode.LEFT){
-                if((xOffset -= moveRate) < minXOffset){
-                    moveMode = MoveMode.RIGHT;
+            if(leftRightMode == LeftRightMode.LEFT){
+                if((xOffset -= leftRightRate) < minXOffset){
+                    leftRightMode = LeftRightMode.RIGHT;
                 }
             }
         }
@@ -73,6 +80,21 @@ public class GridController{
                 }
             }
         }
+        if(upDownMode != UpDownMode.NONE && thisFrameTime >= nextUpDownTime){
+            nextUpDownTime = thisFrameTime + upDownInterval;
+            if(upDownMode == UpDownMode.DOWN){
+                if((yOffset += upDownRate) >= maxYOffset){
+                    yOffset = maxYOffset;
+                    upDownMode = UpDownMode.UP;
+                }
+            }
+            if(upDownMode == UpDownMode.UP){
+                if((yOffset -= upDownRate) <= 0){
+                    yOffset = 0;
+                    upDownMode = UpDownMode.DOWN;
+                }
+            }
+        }
     }
     
     public Location getAssignmentLocation(int row, int col){
@@ -81,7 +103,7 @@ public class GridController{
     
     private Location calculateLocation(float row, float col){
         int x = (int) (col * gridXSpacing + xOffset + swell * col);
-        int y = (int) (row * gridYSpacing + swell * row * 2);
+        int y = (int) (row * gridYSpacing + yOffset + swell * row * 2);
         return new Location(x, y);
     }
     

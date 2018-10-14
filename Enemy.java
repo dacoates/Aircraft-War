@@ -3,8 +3,9 @@
     
 public class Enemy extends Actor{
     
+    private String id = "";
     private int velocity = GameConstants.DEFAULT_ENEMY_VELOCITY;
-    private int centerX = 150;
+    private int turnRadius = 300;
     public enum Mode{FOLLOW_ROUTE, GOING_TO_GRID_ASSIGNMENT, STAY_IN_GRID, ATTACK, LEFT_TURN, RIGHT_TURN}
     private Mode mode = Mode.FOLLOW_ROUTE;
     private Mode nextMode;
@@ -15,7 +16,7 @@ public class Enemy extends Actor{
     private GridController gridController;
     private int gridRow;
     private int gridCol;
-    
+  
     public Enemy(Route route){
         this.route = route;
         destination = route.getNextWaypoint();
@@ -39,10 +40,17 @@ public class Enemy extends Actor{
     
     public void act(){
         if(mode == Mode.RIGHT_TURN){
-            setRotation(getRotation() + 12);
+            setRotation(getRotation() + 360 / turnRadius * velocity);
             move(velocity);
-            if(getRotation() >= 258 && getRotation() <= 282){
-                mode = Mode.FOLLOW_ROUTE;
+            if(getRotation() >= 270 - 360 / turnRadius && getRotation() <= 270 + 360 / turnRadius){
+                mode = nextMode;
+            }
+        }
+        if(mode == Mode.LEFT_TURN){
+            setRotation(getRotation() - 360 / turnRadius * velocity);
+            move(velocity);
+            if(getRotation() >= 270 - 360 / turnRadius && getRotation() <= 270 + 360 / turnRadius){
+                mode = nextMode;
             }
         }
         if(mode == Mode.FOLLOW_ROUTE){
@@ -86,9 +94,13 @@ public class Enemy extends Actor{
     }
     
     private boolean hasReached(Location waypoint){
-        if(mode == Mode.FOLLOW_ROUTE && hasReached(140, 250)){
+        if(mode == Mode.FOLLOW_ROUTE && hasReached(530, 400)){
             mode = Mode.RIGHT_TURN;
-            nextMode = Mode.FOLLOW_ROUTE;
+            nextMode = Mode.GOING_TO_GRID_ASSIGNMENT;
+        }
+        if(mode == Mode.FOLLOW_ROUTE && hasReached(70, 400)){
+            mode = Mode.LEFT_TURN;
+            nextMode = Mode.GOING_TO_GRID_ASSIGNMENT;
         }
         return hasReached(waypoint.getX(), waypoint.getY());
     }

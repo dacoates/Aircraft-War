@@ -1,11 +1,12 @@
 #BlueJ class context
 comment0.target=Route
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ FlightPlan\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ A\ list\ of\ Waypoints\ for\ an\ Enemy\ to\ follow\ that\ describe\ the\ path\ to\ be\ taken.\r\n\ \r\n\ @author\ (Dave\ Coates)\ \r\n\ @version\ (October\ 2018)\r\n
 comment1.params=
 comment1.target=Waypoint\ getStartingWaypoint()
-comment1.text=\r\n\ Returns\ the\ first\ waypoint\ in\ this\ FlightPlan\r\n\ \r\n
+comment1.text=\r\n\ Returns\ the\ first\ waypoint\ in\ this\ Route\ regardless\ of\ what\ the\ next\ Waypoint\ is.\r\n
 comment2.params=
 comment2.target=Waypoint\ getNextWaypoint()
+comment2.text=\r\n\ Returns\ the\ next\ Waypoint\ in\ this\ rounte.\ Calling\ this\ method\ repeatedly\ will\ allow\ the\ calling\ class\ to\ consume\r\n\ all\ Waypoints\ in\ the\ route.\r\n\ @Return\ Returns\ null\ if\ there\ are\ no\ more\ Waypoints.\r\n
 comment3.params=
 comment3.target=Waypoint\ getCurrentWaypoint()
 comment4.params=w

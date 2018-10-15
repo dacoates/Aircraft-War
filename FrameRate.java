@@ -13,15 +13,19 @@ public class FrameRate extends Actor
     long thisFrameTime = lastFrameTime;
     long lastDisplayTime = lastFrameTime;
     long displayInterval = 750; // Display every .75 seconds.
+    
+    public FrameRate(){
+        setImage(new GreenfootImage("FR:", 18, Color.WHITE, Color.BLACK));
+    }
+    
     /**
-     * Act - do whatever the FrameRate wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
+     * 
      */
     public void act(){
         thisFrameTime = new Date().getTime();
-        long frameRate = 1000 / (thisFrameTime - lastFrameTime);
+        long frameRate = 1000 / (thisFrameTime - lastFrameTime) + 1; // avoid divide by zero error
         if(thisFrameTime - lastDisplayTime > displayInterval){
-            setImage(new GreenfootImage("" + frameRate, 36, Color.WHITE, Color.BLACK));
+            setImage(new GreenfootImage("FR:" + frameRate, 18, Color.WHITE, Color.BLACK));
             lastDisplayTime = thisFrameTime;
         }
         lastFrameTime = thisFrameTime;

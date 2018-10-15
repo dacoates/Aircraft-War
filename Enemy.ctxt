@@ -2,6 +2,10 @@
 comment0.target=Enemy
 comment1.params=route
 comment1.target=Enemy(Route)
+comment10.params=
+comment10.target=int\ getPointValue()
+comment11.params=pointValue
+comment11.target=void\ setPointVAlue(int)
 comment2.params=gridController\ row\ col
 comment2.target=void\ setGridController(GridController,\ int,\ int)
 comment3.params=enable
@@ -18,4 +22,4 @@ comment8.params=waypoint
 comment8.target=boolean\ hasReached(Location)
 comment9.params=x\ y
 comment9.target=boolean\ hasReached(int,\ int)
-numComments=10
+numComments=12

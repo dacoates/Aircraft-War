@@ -8,9 +8,7 @@ import java.util.*;
  */
 public class EnemyRocket extends Actor{
     
-    boolean canAim = false;
-    
-
+    boolean canAim = true;
     
     public EnemyRocket(){
         super();

@@ -15,6 +15,8 @@ public class Stars extends World{
         super(GameConstants.WORLD_WIDTH, GameConstants.WORLD_HEIGHT, GameConstants.WORLD_CELL_SIZE); 
         addObject(new Player(), getSpawnX(), getSpawnY());
         addObject(new EnemyController(), 1, 1);
+        addObject(new FrameRate(), 35, 10);
+        addObject(new ScoreDisplay(), 450, 15);
     }
     
     private int getSpawnX(){

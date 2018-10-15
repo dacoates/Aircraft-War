@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.*;
 
 /**
  * Write a description of class Rocket here.
@@ -23,9 +24,11 @@ public class Rocket extends Actor{
     public void act(){
         move(velocity);
         if(isTouching(Enemy.class)){
+            Enemy enemy = (Enemy) getIntersectingObjects(Enemy.class).get(0);
+            getWorld().getObjects(ScoreDisplay.class).get(0).add(enemy.getPointValue());
             removeTouching(Enemy.class);
-            Explosion e = new Explosion();
-            getWorld().addObject(e, getX(), getY());
+            Explosion explosion = new Explosion();
+            getWorld().addObject(explosion, getX(), getY());
             getWorld().removeObject(this);
             return;
         }

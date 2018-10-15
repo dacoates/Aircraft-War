@@ -1,26 +1,29 @@
 import java.util.*;
 
 /**
- * Write a description of class FlightPlan here.
+ * A list of Waypoints for an Enemy to follow that describe the path to be taken.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Dave Coates) 
+ * @version (October 2018)
  */
-public class Route  
-{
-    // instance variables - replace the example below with your own
+public class Route{
+
     private ArrayList<Waypoint> waypoints = new ArrayList<Waypoint>();
-    
     int currentWaypoint = 0;
 
     /**
-     * Returns the first waypoint in this FlightPlan
-     * 
+     * Returns the first waypoint in this Route regardless of what the next Waypoint is.
      */
     public Waypoint getStartingWaypoint(){
         return waypoints.get(0);
     }
     
+    
+    /**
+     * Returns the next Waypoint in this rounte. Calling this method repeatedly will allow the calling class to consume
+     * all Waypoints in the route.
+     * @Return Returns null if there are no more Waypoints.
+     */
     public Waypoint getNextWaypoint(){
        Waypoint nextWaypoint = waypoints.get(currentWaypoint++);
        if(currentWaypoint >= waypoints.size()){

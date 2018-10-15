@@ -29,6 +29,7 @@ public class EnemyController extends Actor{
         routeA1 = new RouteA();
         routeA2 = routeA1.getVerticalMirrorRoute(150);
         gridController = new GridController(5, 10);
+        setImage(new GreenfootImage("", 1, Color.BLACK, Color.BLACK));
     }
     
     

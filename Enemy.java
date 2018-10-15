@@ -5,17 +5,22 @@ public class Enemy extends Actor{
     
     private String id = "";
     private int velocity = GameConstants.DEFAULT_ENEMY_VELOCITY;
-    private int turnRadius = 300;
+    private int turnRate = 9;
+    private int turnExit = 270;
     public enum Mode{FOLLOW_ROUTE, GOING_TO_GRID_ASSIGNMENT, STAY_IN_GRID, ATTACK, LEFT_TURN, RIGHT_TURN}
     private Mode mode = Mode.FOLLOW_ROUTE;
     private Mode nextMode;
     private Route route;
     private Location destination;
     private boolean canFire = false;
-    private int fireProbability = 35;
+    private int fireProbability = 3;
     private GridController gridController;
     private int gridRow;
     private int gridCol;
+    private long thisFrameTime = 0;
+    private long turnInterval = 30;
+    private long nextTurnTime = 0;
+    private int pointValue = GameConstants.DEFAULT_ENEMY_POINT_VALUE;
   
     public Enemy(Route route){
         this.route = route;
@@ -43,17 +48,24 @@ public class Enemy extends Actor{
     }
     
     public void act(){
+        thisFrameTime = new java.util.Date().getTime();
         if(mode == Mode.RIGHT_TURN){
-            setRotation(getRotation() + 360 / turnRadius * velocity);
+            if(thisFrameTime >= nextTurnTime){
+                setRotation((getRotation() + turnRate ) % 360);
+                nextTurnTime = thisFrameTime + turnInterval;
+            }
             move(velocity);
-            if(getRotation() >= 270 - 360 / turnRadius && getRotation() <= 270 + 360 / turnRadius){
+            if(getRotation() >= turnExit - turnRate  && getRotation() <= turnExit + turnRate){
                 mode = nextMode;
             }
         }
         if(mode == Mode.LEFT_TURN){
-            setRotation(getRotation() - 360 / turnRadius * velocity);
+            if(thisFrameTime >= nextTurnTime){
+                setRotation((getRotation() - turnRate) % 360);
+                nextTurnTime = thisFrameTime + turnInterval;
+            }
             move(velocity);
-            if(getRotation() >= 270 - 360 / turnRadius && getRotation() <= 270 + 360 / turnRadius){
+            if(getRotation() >= turnExit - turnRate && getRotation() <= turnExit + turnRate){
                 mode = nextMode;
             }
         }
@@ -117,5 +129,13 @@ public class Enemy extends Actor{
         double y2 = (double)getY();
         double distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
         return distance < Math.ceil(velocity * .9); // If within 90% of your velocity to target, then consider target reached.
+    }
+    
+    public int getPointValue(){
+        return this.pointValue;
+    }
+    
+    public void setPointVAlue(int pointValue){
+        this.pointValue = pointValue;
     }
 }

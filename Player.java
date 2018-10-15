@@ -13,7 +13,7 @@ public class Player extends Actor
     private boolean canFire;
     
     public Player(){
-        getImage().scale(50, 50);
+        getImage().scale(40, 42);
     }
     
     /**

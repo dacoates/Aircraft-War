@@ -15,7 +15,7 @@ public class FrameRate extends Actor
     long displayInterval = 750; // Display every .75 seconds.
     
     public FrameRate(){
-        setImage(new GreenfootImage("FR:", 18, Color.WHITE, Color.BLACK));
+        setImage(new GreenfootImage("FPS:", 24, Color.RED, Color.BLACK));
     }
     
     /**
@@ -23,9 +23,9 @@ public class FrameRate extends Actor
      */
     public void act(){
         thisFrameTime = new Date().getTime();
-        long frameRate = 1000 / (thisFrameTime - lastFrameTime) + 1; // avoid divide by zero error
+        long frameRate = 1000 / (thisFrameTime - lastFrameTime + 1); // avoid divide by zero error
         if(thisFrameTime - lastDisplayTime > displayInterval){
-            setImage(new GreenfootImage("FR:" + frameRate, 18, Color.WHITE, Color.BLACK));
+            setImage(new GreenfootImage("FPS:" + frameRate, 24, Color.RED, Color.BLACK));
             lastDisplayTime = thisFrameTime;
         }
         lastFrameTime = thisFrameTime;

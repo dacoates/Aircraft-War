@@ -18,6 +18,7 @@ public class GridController{
     private UpDownMode upDownMode = UpDownMode.DOWN;
     private float worldWidth = (float) GameConstants.WORLD_WIDTH;
     private float worldHeight = (float) GameConstants.WORLD_HEIGHT;
+    private float yMargin = 15f;
     private float leftRightRate = .4f;
     private float maxYOffset = 20f;
     private float swellRate = .02f;
@@ -103,7 +104,7 @@ public class GridController{
     
     private Location calculateLocation(float row, float col){
         int x = (int) (col * gridXSpacing + xOffset + swell * col);
-        int y = (int) (row * gridYSpacing + yOffset + swell * row * 2);
+        int y = (int) (row * gridYSpacing + yOffset + swell * row * 2 + yMargin);
         return new Location(x, y);
     }
     

@@ -11,7 +11,7 @@ public class ScoreDisplay extends Actor{
     private long score = 0;
     
     public ScoreDisplay(){
-        setImage(new GreenfootImage("Score:", 18, Color.RED, Color.BLACK));
+        setImage(new GreenfootImage("Score:", 24, Color.RED, Color.BLACK));
     }
 
     public void act(){

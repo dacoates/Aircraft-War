@@ -5,7 +5,7 @@ public class Enemy extends Actor{
     
     private String id = "";
     private int velocity = GameConstants.DEFAULT_ENEMY_VELOCITY;
-    private int turnRate = 9;
+    private int turnRate = 23;
     private int turnExit = 270;
     public enum Mode{FOLLOW_ROUTE, GOING_TO_GRID_ASSIGNMENT, STAY_IN_GRID, ATTACK, LEFT_TURN, RIGHT_TURN}
     private Mode mode = Mode.FOLLOW_ROUTE;

@@ -2,7 +2,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.List;
 
 /**
- * Write a description of class Enemy_Controller here.
+ * Write a description of class EnemyController here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
@@ -34,7 +34,7 @@ public class EnemyController extends Actor{
     
     
     /**
-     * Act - do whatever the Enemy_Controller wants to do. This method is called whenever
+     * Act - do whatever the EnemyController wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act(){

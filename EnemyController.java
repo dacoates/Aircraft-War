@@ -60,8 +60,8 @@ public class EnemyController extends Actor{
     }
     
     private void spawn(Enemy enemy){
-        int spawnX = enemy.getDestination().getX();
-        int spawnY = enemy.getDestination().getY();
+        int spawnX = enemy.getDestination().getLocation().getX();
+        int spawnY = enemy.getDestination().getLocation().getY();
         getWorld().addObject(enemy, spawnX, spawnY);
     }
     

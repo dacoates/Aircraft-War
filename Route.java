@@ -52,7 +52,7 @@ public class Route{
         Route newRoute = new Route();
         for(int i = 0; i < waypoints.size(); i++){
             Waypoint wp = waypoints.get(i);
-            newRoute.addWaypoint(new Waypoint(centerX + centerX - wp.getX(), wp.getY()));
+            newRoute.addWaypoint(new Waypoint(centerX + centerX - wp.getLocation().getX(), wp.getLocation().getY()));
         }
         return newRoute;
     }

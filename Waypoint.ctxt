@@ -1,8 +1,15 @@
 #BlueJ class context
 comment0.target=Waypoint
-comment0.text=\r\n\ Represents\ a\ destination\ Location\ in\ an\ X,\ Y\ cordinate\ grid.\r\n\ \r\n\ @author\ (Dave\ Coates)\ \r\n\ @version\ (October\ 13,\ 2018)\r\n
+comment0.text=\r\n\ An\ x\ and\ y\ grid\ location\ in\ the\ world\ that\ can\ be\ used\ in\ a\ route.\r\n\ \r\n\ @author\ (Dave\ Coates)\ \r\n\ @version\ (October\ 16,\ 2018)\r\n
 comment1.params=x\ y
 comment1.target=Waypoint(int,\ int)
-comment2.params=
-comment2.target=Waypoint\ clone()
-numComments=3
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Waypoint\r\n
+comment2.params=destination
+comment2.target=Waypoint(Location)
+comment3.params=
+comment3.target=Waypoint()
+comment4.params=
+comment4.target=Location\ getLocation()
+comment5.params=
+comment5.target=Waypoint\ clone()
+numComments=6

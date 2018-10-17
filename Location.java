@@ -5,9 +5,11 @@
  * @version (October 13, 2018)
  */
 public class Location implements Cloneable{
-    // instance variables - replace the example below with your own
+
     private int x;
     private int y;
+    
+    public Location(){}
 
     /**
      * Constructor for objects of class Location
@@ -34,7 +36,6 @@ public class Location implements Cloneable{
     }
     
     public Location clone(){
-        return new Location(getX(), getY());
+        return new Location(x, y);
     }
-
 }

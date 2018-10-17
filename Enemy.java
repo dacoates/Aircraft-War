@@ -11,7 +11,7 @@ public class Enemy extends Actor{
     private Mode mode = Mode.FOLLOW_ROUTE;
     private Mode nextMode;
     private Route route;
-    private Location destination;
+    private Waypoint destination;
     private boolean canFire = false;
     private int fireProbability = 3;
     private GridController gridController;
@@ -39,12 +39,16 @@ public class Enemy extends Actor{
         this.canFire = enable;
     }
     
-    public Location getDestination(){
+    public Waypoint getDestination(){
         return destination.clone();
     }
     
-    public void turnTowards(Location waypoint){
-        turnTowards(waypoint.getX(), waypoint.getY());
+    public void turnTowards(Location location){
+        turnTowards(location.getX(), location.getY());
+    }
+    
+    public void turnTowards(Waypoint waypoint){
+        turnTowards(waypoint.getLocation());
     }
     
     public void act(){
@@ -74,7 +78,7 @@ public class Enemy extends Actor{
                 destination = route.getNextWaypoint();
             }
             if(hasReached(destination) && route.isOver()){
-                destination = gridController.getAssignmentLocation(gridRow, gridCol);
+                destination = new Waypoint(gridController.getAssignmentLocation(gridRow, gridCol));
                 mode = Mode.GOING_TO_GRID_ASSIGNMENT;
             }
             turnTowards(destination);
@@ -106,11 +110,11 @@ public class Enemy extends Actor{
         }
     }
     
-    private void setLocation(Location waypoint){
-        setLocation(waypoint.getX(), waypoint.getY());
+    private void setLocation(Location location){
+        setLocation(location.getX(), location.getY());
     }
     
-    private boolean hasReached(Location waypoint){
+    private boolean hasReached(Location location){
         if(mode == Mode.FOLLOW_ROUTE && hasReached(530, 400)){
             mode = Mode.RIGHT_TURN;
             nextMode = Mode.GOING_TO_GRID_ASSIGNMENT;
@@ -119,8 +123,13 @@ public class Enemy extends Actor{
             mode = Mode.LEFT_TURN;
             nextMode = Mode.GOING_TO_GRID_ASSIGNMENT;
         }
-        return hasReached(waypoint.getX(), waypoint.getY());
+        return hasReached(location.getX(), location.getY());
     }
+    
+    private boolean hasReached(Waypoint waypoint){
+        return hasReached(waypoint.getLocation());
+    }
+    
     
     private boolean hasReached(int x, int y){
         double x1 = (double)x;

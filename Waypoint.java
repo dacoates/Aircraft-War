@@ -1,17 +1,33 @@
 /**
- * Represents a destination Location in an X, Y cordinate grid.
+ * An x and y grid location in the world that can be used in a route.
  * 
  * @author (Dave Coates) 
- * @version (October 13, 2018)
+ * @version (October 16, 2018)
  */
-public class Waypoint extends Location implements Cloneable{
+public class Waypoint extends RouteLeg implements Cloneable{
 
+    private Location location;
+
+    /**
+     * Constructor for objects of class Waypoint
+     */
     public Waypoint(int x, int y){
-        super(x, y);
+        location = new Location(x, y);
+    }
+    
+    public Waypoint(Location destination){
+        location = destination;
+    }
+    
+    public Waypoint(){
+        location = new Location();
+    }
+    
+    public Location getLocation(){
+        return location.clone();
     }
     
     public Waypoint clone(){
-        return new Waypoint(getX(), getY());
+        return new Waypoint(location.getX(), location.getY());
     }
-
 }

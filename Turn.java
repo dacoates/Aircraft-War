@@ -4,7 +4,7 @@
  * @author (Dave Coates) 
  * @version (October 14, 2018)
  */
-public class Turn{
+public class Turn extends RouteLeg{
     
     public enum Direction {RIGHT, LEFT}
     private Direction direction;

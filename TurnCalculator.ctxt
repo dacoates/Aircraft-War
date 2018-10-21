@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=TurnCalculator
+comment0.text=\r\n\ A\ calculator\ class\ that\ will\ calculate\ the\ next\ point\ along\ the\ circumference\ of\ a\ circle\ of\ a\ turn.\r\n\ \r\n\ @author\ (Dave\ Coates)\ \r\n\ @version\ (October\ 16,\ 2018)\r\n
+comment1.params=turn\ start\ currentRotation
+comment1.target=TurnCalculator(Turn,\ Location,\ int)
+comment2.params=world\ move
+comment2.target=void\ testPointsOfTurn(greenfoot.World,\ int)
+comment3.params=
+comment3.target=int\ getRotation()
+comment4.params=move
+comment4.target=Location\ getNextLocation(int)
+comment5.params=theta
+comment5.target=boolean\ isExitTheta(double)
+numComments=6

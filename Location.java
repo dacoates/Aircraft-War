@@ -38,4 +38,8 @@ public class Location implements Cloneable{
     public Location clone(){
         return new Location(x, y);
     }
+    
+    public String toString(){
+        return "(" +x +", " +y +")";
+    }
 }

@@ -21,7 +21,7 @@ public class EnemyController extends Actor{
     private int gridCol1 = 1;
     private int gridRow2 = 1;
     private int gridCol2 = 6;
-    int totalEnemyToSpawn = 50;
+    int totalEnemyToSpawn = 1; //50;
     Route routeA1, routeA2;
     GridController gridController;
     

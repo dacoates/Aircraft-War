@@ -12,6 +12,9 @@ public class Enemy extends Actor{
     private Mode nextMode;
     private Route route;
     private Waypoint destination;
+    private Turn turn;
+    private TurnCalculator turnCalc;
+    private Location nextTurnLocation;
     private boolean canFire = false;
     private int fireProbability = 3;
     private GridController gridController;
@@ -65,10 +68,21 @@ public class Enemy extends Actor{
         }
         if(mode == Mode.LEFT_TURN){
             if(thisFrameTime >= nextTurnTime){
-                setRotation((getRotation() - turnRate) % 360);
-                nextTurnTime = thisFrameTime + turnInterval;
+                //setRotation((getRotation() - turnRate) % 360);
+                Location nextLoc = turnCalc.getNextLocation(velocity * 3);
+                if(nextLoc == null){ // Turn is over
+                    System.out.println("------Turn is over");
+                    mode = nextMode;
+                    velocity = 5;
+                } else {
+                    setLocation(nextLoc.getX(), nextLoc.getY());
+                    setRotation(turnCalc.getRotation());
+                    System.out.println("...still turning...");
+                    nextTurnTime = thisFrameTime + turnInterval;
+                }
             }
-            move(velocity);
+            if(mode != Mode.LEFT_TURN && mode != Mode.RIGHT_TURN)
+                move(velocity);
             if(getRotation() >= turnExit - turnRate && getRotation() <= turnExit + turnRate){
                 mode = nextMode;
             }
@@ -121,9 +135,14 @@ public class Enemy extends Actor{
         }
         if(mode == Mode.FOLLOW_ROUTE && hasReached(70, 400)){
             mode = Mode.LEFT_TURN;
+            turn = new Turn(Turn.Direction.LEFT, 65, 270);
+            turnCalc = new TurnCalculator(turn, new Location(getX(), getY()), getRotation());
             nextMode = Mode.GOING_TO_GRID_ASSIGNMENT;
         }
-        return hasReached(location.getX(), location.getY());
+        if(mode != mode.RIGHT_TURN && mode != mode.LEFT_TURN)
+            return hasReached(location.getX(), location.getY());
+        else 
+            return false;
     }
     
     private boolean hasReached(Waypoint waypoint){

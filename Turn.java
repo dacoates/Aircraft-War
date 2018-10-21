@@ -7,7 +7,7 @@
 public class Turn extends RouteLeg{
     
     public enum Direction {RIGHT, LEFT}
-    private Direction direction;
+    public Direction direction;
     private float radius;
     private int exitRotation;
 
@@ -20,6 +20,16 @@ public class Turn extends RouteLeg{
         this.exitRotation = exitRotation;
     }
     
+    public Direction getDirection(){
+        return direction;
+    }
     
-
+    public float getRadius(){
+        return radius;
+    }
+    
+    public int getExitRotation(){
+        return exitRotation;
+    }
+    
 }

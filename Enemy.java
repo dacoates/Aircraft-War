@@ -69,7 +69,7 @@ public class Enemy extends Actor{
         if(mode == Mode.LEFT_TURN){
             if(thisFrameTime >= nextTurnTime){
                 //setRotation((getRotation() - turnRate) % 360);
-                Location nextLoc = turnCalc.getNextLocation(velocity * 3);
+                Location nextLoc = turnCalc.getNextLocation(velocity);
                 if(nextLoc == null){ // Turn is over
                     System.out.println("------Turn is over");
                     mode = nextMode;
@@ -77,7 +77,7 @@ public class Enemy extends Actor{
                 } else {
                     setLocation(nextLoc.getX(), nextLoc.getY());
                     setRotation(turnCalc.getRotation());
-                    System.out.println("...still turning...");
+//                    System.out.println("...still turning...");
                     nextTurnTime = thisFrameTime + turnInterval;
                 }
             }

@@ -26,28 +26,27 @@ public class TurnCalculator{
 
     public TurnCalculator(Turn turn, Location start, int currentRotation){
         this.turn = turn;
-        exitTheta = (turn.getExitRotation() - 90) * PI / 180;
+        exitTheta = (turn.getExitRotation() - 90);
         startLocation = new Location(start.getX(), start.getY());
         double currentHeadingDeg = currentRotation;
-        double currentHeadingRad = currentHeadingDeg * PI / 180;
         if(turn.getDirection() == Turn.Direction.RIGHT){
-            thetaToCenter = (currentHeadingRad + (PI/2)) % (2 * PI);
-            startTheta = (thetaToCenter + PI) % (2 * PI);      
+            thetaToCenter = (currentHeadingDeg + 90) % (360);
+            startTheta = (thetaToCenter + 180) % (360);      
         } else {
-            thetaToCenter = (currentHeadingRad - (PI/2)) % (2 * PI);
-            startTheta = (thetaToCenter - PI) % (2 * PI);
+            thetaToCenter = (currentHeadingDeg - 90) % (360);
+            startTheta = (thetaToCenter - 180) % (360);
         }
         currentTheta = startTheta;
         circumference = 2 * PI * turn.getRadius();
-        centerX = startLocation.getX() + turn.getRadius() * cos(thetaToCenter);
-        centerY = startLocation.getY() + turn.getRadius() * sin(thetaToCenter);
+        centerX = startLocation.getX() + turn.getRadius() * cos(thetaToCenter * PI / 180);
+        centerY = startLocation.getY() + turn.getRadius() * sin(thetaToCenter * PI / 180);
         System.out.println("Start: " +startLocation);
-        System.out.println("Current rotation: " +currentHeadingRad * 180 / PI);
-        System.out.println("Exit theta: " +exitTheta * 180 / PI);
+        System.out.println("Current rotation: " +currentHeadingDeg);
+        System.out.println("Exit theta: " +exitTheta);
         System.out.println(turn.direction +" radius: " +turn.getRadius());
-        System.out.println("thetaToCenter: " +thetaToCenter * 180 / PI);
+        System.out.println("thetaToCenter: " +thetaToCenter);
         System.out.println("Center: " +round(centerX) +", " +round(centerY));
-        System.out.println("firstTheta: " +startTheta * 180 / PI);
+        System.out.println("firstTheta: " +startTheta);
         System.out.println("");
     }
     
@@ -58,36 +57,33 @@ public class TurnCalculator{
     }
     
     public int getRotation(){
-        double rotation = (currentTheta - PI) % (2 * PI);
-        System.out.println("rotation (rad): " +rotation +", rotation (deg): " + rotation * 180 / PI);
-        int rounded = (int) round(rotation * 180 / PI);
-        System.out.println("rounded: " +rounded);
+        double rotation = (currentTheta - 90) % (360);
+        int rounded = (int) round(rotation);
+        System.out.println("rotation: " +rotation +", rounded: " +rounded);
         return rounded;
     }
     
     public Location getNextLocation(int move){
-        //System.out.println("\ngetNextLocation(" +move +") currentTheta: " +round(currentTheta * 180 / PI));
         if(turn.direction == Turn.Direction.RIGHT){
-            nextTheta = currentTheta - (move / circumference) / 2 * PI;
-            System.out.println("nextTheta RIGHT: " + round(nextTheta * 180 / PI));
+            nextTheta = currentTheta - (move / circumference) * 360;
+            System.out.println("nextTheta RIGHT: " + round(nextTheta));
         }else{
-            nextTheta = currentTheta + (move / circumference) / 2 * PI;
+            nextTheta = currentTheta + (move / circumference) * 360;
             //System.out.println("nextTheta LEFT: " + round(nextTheta * 180 / PI));
         }
         if(isExitTheta(nextTheta)){ // Then we have reached exitTheta so turn is over
             return null;
         } else {
             currentTheta = nextTheta;
-            int x = (int) round(centerX + turn.getRadius() * sin(nextTheta));
-            int y = (int) round(centerY + turn.getRadius() * cos(nextTheta));
-            //System.out.println("Next turn Location: " +x +", " +y);
-//            if(testCounter++ > 100)
-
-                System.out.println("nextTheta: " +round(nextTheta * 180 / PI) 
-                    +", x, y, " +x +", " +y 
-                    +" ,exitTheta = " +round(exitTheta * 180 / PI) 
-                    +" delta: " +round(delta * 180 / PI)
+            int x = (int) round(centerX + turn.getRadius() * sin(nextTheta * PI / 180));
+            int y = (int) round(centerY + turn.getRadius() * cos(nextTheta * PI / 180));
+                System.out.println("nextTheta: " +round(nextTheta) 
+                  //+", x, y, " +x +", " +y 
+                    +" ,exitTheta = " +round(exitTheta) 
+                    +" delta: " +round(delta)
+                    +" ,rotation = " +getRotation() 
                 );
+                System.out.println(x +", " +y);
             return new Location(x, y);
         }
     }
@@ -102,7 +98,7 @@ public class TurnCalculator{
             System.out.println("Done: delta: " +delta +", range: " +range);
             return true;
         } else {
-            System.out.println("   delta: " +delta +", range: " +range);
+            //System.out.println("   delta: " +delta +", range: " +range);
             return false;
         }
     }
